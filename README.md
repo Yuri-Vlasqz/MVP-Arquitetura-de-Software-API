@@ -25,22 +25,22 @@ No contexto da crescente variedade de serviços de streaming e da variação de 
 ## Rotas da API REST:
 
 #### Rotas com chamadas a API externa TMDB
-| **URL da rota** | **Método** | **Descrição da ação**                                                                                                | **Códigos de status de respostas** |
+| **URL da rota** | **Método** | **Descrição da ação**                                                                                                | **Status de respostas documentados** |
 |-----------------|------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------|
 | /search         | GET        | Busca possíveis resultados de programas, a partir do nome.                                                           | 200, 400                       |
 | /details        | GET        | Busca de informações e provedores de um programa, a partir do id TMDB e tipo de mídia.                               | 200, 400                       |
 
 
 #### Rotas protegidas da API
-| **URL da rota** | **Método** | **Descrição da ação**                                                                                                   | **Códigos de status de respostas** |
+| **URL da rota** | **Método** | **Descrição da ação**                                                                                                   | **Status de respostas documentados** |
 |-----------------|------------|-------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| /lista          | POST       | Adiciona uma nova lista atrelada a um usuário, a partir do id do usuário e nome da lista.                               | 201, 404, 409, 500             |
-| /lista          | PUT        | Atualiza informações de uma lista, a partir do id.                                                                      | 200, 404, 409, 500             |
-| /lista          | DELETE     | Deleta uma lista, a partir do id.                                                                                       | 200, 404, 500                  |
-| /programa-lista | POST       | Adiciona uma associação entre um programa e uma lista, a partir de seus id's. OBS: Cria um programa se ele não existir. | 201, 404, 409, 500             |
-| /programa-lista | DELETE     | Remove uma associação entre um programa e uma lista, a partir de seus id's.                                             | 200, 404, 500                  |
-| /usuario        | GET        | Busca por um usuário, a partir do email.                                                                                | 200, 404, 500                  |
-| /usuario        | POST       | Cria um usuário a partir do email, com as listas padrão (Favoritos, Assistidos, Próximos a ver).                        | 201, 409, 500                  |
+| /lista          | POST       | Adiciona uma nova lista atrelada a um usuário, a partir do id do usuário e nome da lista.                               | 201, 401, 404, 409, 500        |
+| /lista          | PUT        | Atualiza informações de uma lista, a partir do id.                                                                      | 200, 401, 404, 409, 500        |
+| /lista          | DELETE     | Deleta uma lista, a partir do id.                                                                                       | 200, 401, 404, 500             |
+| /programa-lista | POST       | Adiciona uma associação entre um programa e uma lista, a partir de seus id's. OBS: Cria um programa se ele não existir. | 201, 401, 404, 409, 500        |
+| /programa-lista | DELETE     | Remove uma associação entre um programa e uma lista, a partir de seus id's.                                             | 200, 401, 404, 500             |
+| /usuario        | GET        | Busca por um usuário, a partir do email.                                                                                | 200, 401, 404, 500             |
+| /usuario        | POST       | Cria um usuário a partir do email, com as listas padrão (Favoritos, Assistidos, Próximos a ver).                        | 201, 401, 409, 500             |
 <br>
 
 ## Tecnologias principais
