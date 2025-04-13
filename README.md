@@ -66,7 +66,7 @@ Para executar o projeto, você precisará ter instalado:
 
 #### Configuração do Auth0 para proteger rotas:
 1. Crie uma conta no [Auth0](https://auth0.com/).
-2. Configure uma aplicação do tipo API ou _Auth0 Management API_ no painel Auth0 e obtenha esses valores:
+2. Configure a aplicação API padrão _Auth0 Management API_ no [painel Auth0](https://auth0.com/docs/get-started/auth0-overview/dashboard) e obtenha esses valores:
    - `Domain`
    - `API Identifier`
 
