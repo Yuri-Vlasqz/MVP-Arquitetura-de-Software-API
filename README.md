@@ -4,13 +4,25 @@ Este repositório contém a implementação do back-end do **MVP** (_Minimum Via
 A parte do front-end pode ser acessada em [MVP-Arquitetura-de-Software-Interface](https://github.com/Yuri-Vlasqz/MVP-Arquitetura-de-Software-Interface)
 
 No contexto da crescente variedade de serviços de streaming e da variação de conteúdo de acordo com a localização geográfica, foi criado esse projeto:
-> A aplicação web, **"Tudo a ver 2.0"**, permite a busca de séries e filmes disponíveis em todas plataformas de _streaming_ de qualquer país. Além disso, ao fazer seu login protegido pelo [Auth0](https://auth0.com/), cada usuário pode criar e customizar suas próprias listas de programas, descobrindo em um clique, onde assistir em qualquer lugar e dispositivo.
+> A aplicação web, **"Tudo a ver 2.0"**, permite a busca de séries e filmes disponíveis em todas plataformas de _streaming_ de qualquer país. Além disso, ao fazer o login, cada usuário pode criar e customizar, de forma protegida, suas próprias listas de programas, descobrindo em um clique, onde assistir em qualquer lugar que estiver.
 
 
-## Arquitetura do projeto
+## Arquitetura da aplicação:
+
+<p align="center">
+  <img src="assets/Fluxograma%20de%20arquitetura%20de%20MVP.png">
+</p>
+<h6 align="center">Fluxograma - Cenário 1.1</h6>
 
 
-## Rotas da API:
+#### O contêiner Python representa o conteúdo deste repositório:
+- A consulta de dados sobre filmes e séries é feita utilizando o serviço externo, _The Movie Data Base_
+- A consulta de autenticação, de tokens de acesso de usuários, é feita utilizando o serviço externo, _Auth0_
+
+#### O contêiner Node.js representa o conteúdo do repositório [MVP-Arquitetura-de-Software-Interface](https://github.com/Yuri-Vlasqz/MVP-Arquitetura-de-Software-Interface)
+<br>
+
+## Rotas da API REST:
 
 #### Rotas com chamadas a API externa TMDB
 | **URL da rota** | **Método** | **Descrição da ação**                                                                                                | **Códigos de status de respostas** |
@@ -40,6 +52,7 @@ Para executar o projeto, você precisará ter instalado:
 - [aiohttp](https://docs.aiohttp.org/en/stable/) para chamadas concorentes ao TMDB;
 - [SQLAlchemy](https://www.sqlalchemy.org/) para modelagem do banco de dados SQlite;
 
+<br>
 
 ## Configuração das API`s externas 
 
@@ -63,7 +76,7 @@ AUTH0_DOMAIN="Domain"
 AUTH0_API_AUDIENCE="API Identifier"
 TMDB_API_KEY="Token de Leitura da API"
 ```
-
+<br>
 
 ## Instalação e Execução
 
