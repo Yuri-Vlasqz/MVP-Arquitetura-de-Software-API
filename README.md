@@ -16,8 +16,10 @@ No contexto da crescente variedade de serviços de streaming e da variação de 
 
 
 #### O contêiner Python representa o conteúdo deste repositório:
-- A consulta de dados sobre filmes e séries é feita utilizando o serviço externo, _The Movie Data Base_
-- A consulta de autenticação, de tokens de acesso de usuários, é feita utilizando o serviço externo, _Auth0_
+- A comunicação da API com o Interface SPA é feita seguindo o padrão _REST_.
+- A consulta de dados sobre filmes e séries é feita utilizando o serviço externo, _The Movie Data Base_.
+- A consulta de autenticação, dos tokens de acesso de usuários, é feita utilizando o serviço externo, _Auth0_.
+- Os registros de informações de usuários, listas e programas são salvos no banco de dados local _SQlite_.
 
 #### O contêiner Node.js representa o conteúdo do repositório [MVP-Arquitetura-de-Software-Interface](https://github.com/Yuri-Vlasqz/MVP-Arquitetura-de-Software-Interface)
 <br>
@@ -49,7 +51,7 @@ Para executar o projeto, você precisará ter instalado:
 - [Python 3.12](https://www.python.org/);
 - [Flask[async]](https://flask.palletsprojects.com/) para construção da API com requisições assíncronas;
 - [flask-openapi3-swagger](https://luolingchun.github.io/flask-openapi3/v4.x/) para a documentação em `Swagger` da API;
-- [aiohttp](https://docs.aiohttp.org/en/stable/) para chamadas concorentes ao TMDB;
+- [aiohttp](https://docs.aiohttp.org/en/stable/) para chamadas concorrentes ao TMDB;
 - [SQLAlchemy](https://www.sqlalchemy.org/) para modelagem do banco de dados SQlite;
 
 <br>
@@ -64,13 +66,13 @@ Para executar o projeto, você precisará ter instalado:
 
 #### Configuração do Auth0 para proteger rotas:
 1. Crie uma conta no [Auth0](https://auth0.com/).
-2. Configure uma aplicação do tipo API ou `Auth0 Management API` no painel Auth0 e obtenha esses valores:
+2. Configure uma aplicação do tipo API ou _Auth0 Management API_ no painel Auth0 e obtenha esses valores:
    - `Domain`
    - `API Identifier`
 
 
 ## Configuração das variaveis de ambiente
-Crie o arquivo `.env` e preencha com os valores obtidos nas API`s externas, conforme abaixo:
+No diretório raiz do repositório, crie o arquivo `.env` e preencha com os valores obtidos nas API`s externas, conforme abaixo:
 ```
 AUTH0_DOMAIN="Domain"
 AUTH0_API_AUDIENCE="API Identifier"
@@ -85,7 +87,7 @@ TMDB_API_KEY="Token de Leitura da API"
 
 #### Execução pelo ambiente virtual do tipo [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html):
 
-1. No diretório raiz do repositório, pelo terminal, execute o comando abaixo para criar um 
+1. No diretório raiz do repositório, pelo terminal, execute o comando abaixo para criar um ambiente virtual. 
     ```
     python -m venv .venv
     ```
