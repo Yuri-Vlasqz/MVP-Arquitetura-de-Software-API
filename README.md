@@ -73,7 +73,7 @@ Para executar o projeto, você precisará ter instalado:
 
 ## Configuração das variaveis de ambiente
 No diretório raiz do repositório, crie o arquivo `.env` e preencha com os valores obtidos nas API`s externas, conforme abaixo:
-```
+```sh
 AUTH0_DOMAIN="Domain"
 AUTH0_API_AUDIENCE="API Identifier"
 TMDB_API_KEY="Token de Leitura da API"

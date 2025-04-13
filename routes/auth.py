@@ -23,7 +23,7 @@ token = {
   "type": "http",
   "scheme": "bearer",
   "bearerFormat": "JWT",
-  "description": "Digite o header de autorização do tipo `Bearer <token>` adquirido pela rota `/api/token`",
+  "description": "Digite o header de autorização do tipo `Bearer <token>` adquirido pelo Auth0",
 }
 security_schemes = {"Token-Auth0": token}
 
