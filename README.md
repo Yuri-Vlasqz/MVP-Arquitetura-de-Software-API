@@ -10,7 +10,7 @@ No contexto da crescente variedade de serviços de streaming e da variação de 
 ## Arquitetura da aplicação:
 
 <p align="center">
-  <img src="assets/Fluxograma%20de%20arquitetura%20de%20MVP.png">
+  <img src="assets/Fluxograma%20de%20arquitetura%20de%20MVP.png" width="1024">
 </p>
 <h6 align="center">Fluxograma - Cenário 1.1</h6>
 
@@ -20,6 +20,10 @@ No contexto da crescente variedade de serviços de streaming e da variação de 
 - A consulta de dados sobre filmes e séries é feita utilizando o serviço externo, _The Movie Data Base_.
 - A consulta de autenticação, dos tokens de acesso de usuários, é feita utilizando o serviço externo, _Auth0_.
 - Os registros de informações de usuários, listas e programas são salvos no banco de dados local _SQlite_.
+    <p align="center">
+    <img src="assets/DB-Tudo-a-Ver-v2.png" width="1024">
+    </p>
+    <h6 align="center">Diagrama do Banco de dados</h6>
 
 #### O contêiner Node.js representa o conteúdo do repositório [MVP-Arquitetura-de-Software-Interface](https://github.com/Yuri-Vlasqz/MVP-Arquitetura-de-Software-Interface)
 <br>
@@ -49,7 +53,7 @@ No contexto da crescente variedade de serviços de streaming e da variação de 
 
 Para executar o projeto, você precisará ter instalado:
 - [Python 3.12](https://www.python.org/);
-- [Flask[async]](https://flask.palletsprojects.com/) para construção da API com requisições assíncronas;
+- [Flask](https://flask.palletsprojects.com/)[[async](https://flask.palletsprojects.com/en/stable/async-await/)] para construção da API com requisições assíncronas;
 - [flask-openapi3-swagger](https://luolingchun.github.io/flask-openapi3/v4.x/) para a documentação em `Swagger` da API;
 - [aiohttp](https://docs.aiohttp.org/en/stable/) para chamadas concorrentes ao TMDB;
 - [SQLAlchemy](https://www.sqlalchemy.org/) para modelagem do banco de dados SQlite;
