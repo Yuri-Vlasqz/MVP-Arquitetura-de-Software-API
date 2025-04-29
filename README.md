@@ -57,6 +57,7 @@ Para executar o projeto, você precisará ter instalado:
 - [flask-openapi3-swagger](https://luolingchun.github.io/flask-openapi3/v4.x/) para a documentação em `Swagger` da API;
 - [aiohttp](https://docs.aiohttp.org/en/stable/) para chamadas concorrentes ao TMDB;
 - [SQLAlchemy](https://www.sqlalchemy.org/) para modelagem do banco de dados SQlite;
+> Opcional: [Gunicorn](https://gunicorn.org/) para executar a API em um servidor WSGI de produção.
 
 <br>
 
@@ -89,7 +90,7 @@ TMDB_API_KEY="Token de Leitura da API"
 **Clone este repositório pela URL, e siga as intruções para uma das formas de executar a API.**
 
 
-#### Execução pelo ambiente virtual do tipo [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html):
+#### Execução de servidor de desenvolvimento, pelo ambiente virtual do tipo [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html):
 
 1. No diretório raiz do repositório, pelo terminal, execute o comando abaixo para criar um ambiente virtual. 
     ```
@@ -119,7 +120,7 @@ TMDB_API_KEY="Token de Leitura da API"
     ```
 <br>
 
-#### Execução pelo arquivo Dockerfile, através do [Docker](https://www.docker.com/):
+#### Execução do servidor Gunicorn pelo arquivo Dockerfile, através do [Docker](https://www.docker.com/):
 
 1. No diretório raiz do repositório, pelo terminal, crie a imagem do código:
    ```

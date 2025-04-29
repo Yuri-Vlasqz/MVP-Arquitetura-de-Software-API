@@ -1,8 +1,12 @@
-import asyncio, aiohttp
+import aiohttp
 from flask_openapi3 import APIBlueprint, Tag
 from dotenv import load_dotenv
-from schemas import *
+
+import asyncio
+import logging
 import os
+
+from schemas import *
 
 tmdb_tag = Tag(name="TMDB - API externa", description="Chamadas ao TMDB para obtenção de informações de programas")
 tmdb_bp = APIBlueprint('tmdb', __name__, url_prefix='/api', abp_tags=[tmdb_tag])
@@ -49,6 +53,7 @@ async def search(query: TmdbBuscaSchema):
             return apresenta_resultados_busca(results['movies'], results['tv_shows']), 200
 
         except Exception as e:
+            logging.error(f"Erro ao buscar programas: {str(e)}")
             return {"mensagem": str(e)}, 400
 
 
@@ -81,4 +86,5 @@ async def details(query: TmdbBuscaDetalhesSchema):
             return apresenta_detalhes_programa(results['details'], results['watch_providers'], tipo), 200
         
         except Exception as e:
+            logging.error(f"Erro ao buscar detalhes: {str(e)}")
             return {"mensagem": str(e)}, 400

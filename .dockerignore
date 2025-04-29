@@ -1,3 +1,5 @@
-assets
+__pycache__
 .gitignore
+.venv
+assets
 README.md

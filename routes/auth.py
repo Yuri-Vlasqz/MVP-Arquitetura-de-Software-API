@@ -1,10 +1,11 @@
-import requests
 from dotenv import load_dotenv
 from flask import jsonify, request
 from flask_openapi3 import APIBlueprint, Tag
 from jose import jwt
 
-import json, os
+import json
+import os
+import logging
 from functools import wraps
 from urllib.request import urlopen
 
@@ -43,10 +44,12 @@ def requires_auth(f):
         
         # Verificar se o header de autorização está presente
         if not auth_header:
+            logging.warning('Token de autorização ausente')
             return jsonify({'message': 'Token de autorização ausente'}), 401
         
         # Verificar formato do token Bearer
         if not auth_header.startswith('Bearer '):
+            logging.warning('Formato de token inválido. Use "Bearer <token>"')
             return jsonify({'message': 'Formato de token inválido. Use "Bearer <token>"'}), 401
         
         # Extrair o token
@@ -73,6 +76,7 @@ def requires_auth(f):
                     break
             
             if not rsa_key:
+                logging.warning('Chave não encontrada')
                 return jsonify({'message': 'Chave não encontrada'}), 401
             
             # Verificar o token
@@ -91,10 +95,13 @@ def requires_auth(f):
             return f(*args, **kwargs)
         
         except jwt.ExpiredSignatureError:
+            logging.warning('Token expirado')
             return jsonify({'message': 'Token expirado'}), 401
         except jwt.JWTClaimsError:
+            logging.warning('Claims inválidos. Verifique o audience e issuer')
             return jsonify({'message': 'Claims inválidos. Verifique o audience e issuer'}), 401
         except Exception as e:
+            logging.error(f'Erro na autenticação: {str(e)}')
             return jsonify({'message': f'Erro na autenticação: {str(e)}'}), 401
             
     return decorated

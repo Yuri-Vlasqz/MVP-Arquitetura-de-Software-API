@@ -1,6 +1,8 @@
 from flask_openapi3 import APIBlueprint, Tag
 from sqlalchemy.exc import IntegrityError
 
+import logging
+
 from models import Session, Lista, Usuario
 from schemas import *
 from routes.auth import security_schemes, requires_auth
@@ -31,10 +33,12 @@ def post_lista(form: ListaPostSchema):
         return mensagem_resposta_lista("Lista criada com sucesso.", lista), 201
     
     except IntegrityError as e:
+        logging.warning(f"IntegrityError: {e}")
         return {"mensagem": "Lista com o mesmo nome e usuário ja cadastrada."}, 409
     
     except Exception as e:
         session.rollback()
+        logging.error(f"Erro ao criar lista: {str(e)}")
         return {"mensagem": str(e)}, 500
     
     finally:
@@ -62,10 +66,12 @@ def put_lista(form: ListaPutSchema):
         return mensagem_resposta_lista("Lista atualizada com sucesso.", lista), 200
 
     except IntegrityError as e:
+        logging.warning(f"IntegrityError: {e}")
         return {"mensagem": "Lista com o mesmo nome e usuário ja cadastrada."}, 409
 
     except Exception as e:
         session.rollback()
+        logging.error(f"Erro ao atualizar lista: {str(e)}")
         return {"mensagem": str(e)}, 500
     
     finally:
@@ -92,6 +98,7 @@ def del_lista(query: ListaBuscaIdSchema):
 
     except Exception as e:
         session.rollback()
+        logging.error(f"Erro ao deletar lista: {str(e)}")
         return {"mensagem": str(e)}, 500
     
     finally:

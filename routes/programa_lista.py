@@ -1,6 +1,8 @@
 from flask_openapi3 import APIBlueprint, Tag
 from sqlalchemy.exc import IntegrityError
 
+import logging
+
 from models import Session, Lista, Programa
 from schemas import *
 from routes.auth import security_schemes, requires_auth
@@ -28,6 +30,7 @@ def post_programa_de_lista(form: ListaProgramaPostSchema):
 
         programa = session.query(Programa).filter_by(tmdb_id=tmdb_id, tipo=tipo).one_or_none()
         if programa in lista.programas:
+            logging.warning("Programa ja associado a lista.")
             return {"mensagem": "Programa já associado a lista."}, 409
         
         msg_extra = ""
@@ -46,10 +49,12 @@ def post_programa_de_lista(form: ListaProgramaPostSchema):
         return mesagem_resposta_lista_programa(f"Programa {msg_extra}associado a lista com sucesso.", lista, programa), 201
     
     except IntegrityError as e:
+        logging.warning(f"IntegrityError: {e}")
         return {"mensagem": "Programa de mesmo tmdb_id e tipo já cadastrado."}, 409
 
     except Exception as e:
         session.rollback()
+        logging.error(f"Erro ao associar programa a lista: {str(e)}")
         return {"mensagem": str(e)}, 500
 
     finally:
@@ -70,12 +75,15 @@ def del_programa_de_lista(query: ListaProgramaBuscaSchema):
         lista = session.get(entity=Lista, ident=id_lista)
         programa = session.get(entity=Programa, ident=id_programa)
         if not lista:
+            logging.warning("Lista nao encontrada.")
             return {"mensagem": "Lista não encontrada."}, 404
 
         if not programa:
+            logging.warning("Programa nao encontrado.")
             return {"mensagem": "Programa não encontrado."}, 404
 
         if programa not in lista.programas:
+            logging.warning("Associação de programa e lista nao encontrada.")
             return {"mensagem": "Associação de programa e lista não encontrada."}, 404
 
         lista.programas.remove(programa)
@@ -84,6 +92,7 @@ def del_programa_de_lista(query: ListaProgramaBuscaSchema):
 
     except Exception as e:
         session.rollback()
+        logging.error(f"Erro ao remover programa da lista: {str(e)}")
         return {"mensagem": str(e)}, 500
 
     finally:

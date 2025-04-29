@@ -1,6 +1,8 @@
 from flask_openapi3 import APIBlueprint, Tag
 from sqlalchemy.exc import IntegrityError
 
+import logging
+
 from models import Session, Usuario, Lista
 from schemas import *
 from routes.auth import security_schemes, requires_auth
@@ -26,6 +28,7 @@ def get_usuario_email(query: UsuarioBuscaEmailSchema):
 
     except Exception as e:
         session.rollback()
+        logging.error(f"Erro ao buscar usuário: {str(e)}")
         return {"mensagem": str(e)}, 500
     
     finally:
@@ -50,10 +53,12 @@ def post_usuario(form: UsuarioPostSchema):
         return mensagem_resposta_usuario("Usuário criado com sucesso.", usuario), 201
     
     except IntegrityError as e:
+        logging.warning(f"IntegrityError: {e}")
         return {"mensagem": "Usuário com o mesmo email ja cadastrado."}, 409
 
     except Exception as e:
         session.rollback()
+        logging.error(f"Erro ao criar usuário: {str(e)}")
         return {"mensagem": str(e)}, 500
     
     finally:
