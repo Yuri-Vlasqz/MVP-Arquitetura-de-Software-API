@@ -9,6 +9,9 @@ bind = environ.get("GUNICORN_BIND", "0.0.0.0:5000")
 
 # Worker processes
 cores = multiprocessing.cpu_count()
+# Limit to 4 cores or less
+if cores > 4:
+    cores = 4
 workers = int(environ.get("GUNICORN_WORKERS", cores))
 worker_class = environ.get("GUNICORN_WORKER_CLASS", "sync")  # "sync" | "gthread"
 # threads = int(environ.get("GUNICORN_THREADS", cores * 2))
